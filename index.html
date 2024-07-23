@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Project</title>
+  <link href="src/index.css" rel="stylesheet">
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <div x-data="{tab: 'liste'}" class="mx-auto h-screen">
+    <div class="flex border-b-8 text-center bg-blue-400" >
+      <button  @click.prevent="tab = 'liste'" class="p-5 w-full" :class="{ 'bg-white':tab === 'liste'  }">
+        Liste des maisons
+      </button>
+      <button @click.prevent="tab = 'ajouter'" class="p-5 w-full" :class="{ 'bg-white':tab === 'ajouter'  }">
+        Ajouter une maison
+      </button>
+    </div>
+    
+    <div class="bg-slate-300 h-full flex justify-center">
+      <div x-show="tab === 'acceuil'">
+        <p>
+          Acceuil de l'agence
+        </p>
+      </div>
+  
+      <div x-show="tab === 'liste'">
+        <p class="font-bold">
+          Liste des maisons: 
+        </p>
+        <div x-data="housesList">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <template x-for="house in housesList" :key="house.id">
+                  <div class="bg-white rounded-lg shadow-lg p-4">
+                      <img :src="house.imageUrl" alt="House Image" class="w-full h-48 object-cover rounded-lg mb-4">
+                      <p class="text-lg font-semibold" x-text="house.nomMaison"></p>
+                      <p class="text-gray-600" x-text="house.adresse"></p>
+                  </div>
+              </template>
+          </div>
+        </div>
+      </div>
+  
+      <div x-show="tab === 'ajouter'">
+        <p class="font-bold text-center">
+          Ajouter Une Maison
+        </p>
+        <div x-data="formHandler()" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+          <form x-on:submit.prevent="submitForm" method="post"  class="space-y-6">
+              <div>
+                  <label for="nomMaison">Nom:</label>
+                  <input id="nomMaison" type="text" name="nomMaison" class="border p-2">
+              </div>
+              <div>
+                  <label for="prix">Prix:</label>
+                  <input id="prix" type="number" name="prix" class="border p-2">
+              </div>
+              <div>
+                <label for="nbChambres">Nb de chambres:</label>
+                <input id="nbChambres" type="number" name="nbChambres" class="border p-2">
+              </div>
+              <div>
+                <label for="nbSdb">Nb salle de bains:</label>
+                <input id="nbSdb" type="number" name="nbSdb" class="border p-2">
+              </div>
+              <div>
+                <label for="adresse">Adresse:</label>
+                <input id="adresse" type="text" name="adresse"  class="border p-2">
+              </div>
+              <div>
+                <label for="surface">Surface:</label>
+                <input id="surface" type="text" name="surface"  class="border p-2">
+              </div>
+              <div>
+                <label for="image">Image:</label>
+                <input id="image" type="file" name="image" class="border p-2">
+              </div>
+              
+              <button type="submit" class="bg-blue-500 text-white p-2 mt-4 w-full ">Ajouter</button>
+          </form>
+          <div x-show="responseMessage" class="mt-4 p-2 border" x-text="responseMessage"></div>
+        </div>
+      </div>
+  
+    </div>
+    
+  </div>
+</body>
