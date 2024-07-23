@@ -2,14 +2,8 @@ import Alpine from "alpinejs";
 import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('http://127.0.0.1:8090');
-// const authData = await pb.admins.authWithPassword('jadbassil1@gmail.com', 'jbassil,25');
-// console.log(pb.authStore.isValid);
-console.log(pb.authStore.token);
 
-async function getHousesData() {
-    const houses = await pb.collection('maison').getFullList({});
-    return houses;
-}
+console.log(pb.authStore.token);
 
 Alpine.data('housesList', (favori=false) => ({
     housesList: {},
