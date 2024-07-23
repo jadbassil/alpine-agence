@@ -9,6 +9,9 @@ Alpine.data('housesList', (favori=false) => ({
     housesList: {},
     favori: false,
     async init() {
+        await this.fetchHouses();
+    },
+    async fetchHouses() {
         const houses = await pb.collection('maison').getFullList({});
         this.housesList = houses.map(house => {
             house.imageUrl = pb.getFileUrl(house, house.image);
@@ -16,6 +19,9 @@ Alpine.data('housesList', (favori=false) => ({
         });
         console.log(this.housesList);
     },
+    updateList() {
+        this.fetchHouses();
+    }
 }))
 
 Alpine.data('formHandler', () => ({
@@ -26,6 +32,7 @@ Alpine.data('formHandler', () => ({
             const formData = new FormData(form)
             await pb.collection('maison').create(formData)
             this.responseMessage = 'Form submitted successfully!';
+            window.dispatchEvent(new CustomEvent('house-added'));
         } catch (error) {
             console.log(error);
             console.error(error.message);
