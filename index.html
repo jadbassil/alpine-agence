@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Project</title>
+  <title>Agence</title>
   <link href="src/index.css" rel="stylesheet">
   <script type="module" src="src/main.js"></script>
 </head>
+
 <body>
   <div x-data="{tab: 'liste'}" class="mx-auto h-screen">
     <div class="flex border-b-8 text-center bg-blue-400" >
@@ -26,17 +28,18 @@
       </div> -->
   
       <div x-show="tab === 'liste'">
-        <p class="font-bold">
-          Liste des maisons: 
-        </p>
+       
         <div x-data="housesList" @house-added.window="updateList">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
               <template x-for="house in housesList" :key="house.id">
                   <div class="bg-white rounded-lg shadow-lg p-4">
                       <img :src="house.imageUrl" alt="House Image" class="w-full h-48 object-cover rounded-lg mb-4">
-                      <p class="text-lg font-semibold" x-text="house.nomMaison"></p>
+                      <div class="flex flex-row justify-between">
+                        <p class="text-lg font-semibold justify-start" x-text="house.nomMaison"></p>
+                        <img :src="house.favori? '/star.png':'/favorite.png'" @click="setFavori(house)" alt="fav icon" class="justify-end w-6 h-6"/>
+                      </div>
                       <p class="text-gray-600" x-text="house.adresse"></p>
-                  </div>
+                    </div>
               </template>
           </div>
         </div>
@@ -84,6 +87,6 @@
       </div>
   
     </div>
-    
   </div>
+
 </body>

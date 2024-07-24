@@ -5,9 +5,8 @@ const pb = new PocketBase('http://127.0.0.1:8090');
 
 console.log(pb.authStore.token);
 
-Alpine.data('housesList', (favori=false) => ({
-    housesList: {},
-    favori: false,
+Alpine.data('housesList', () => ({
+    housesList: [],
     async init() {
         await this.fetchHouses();
     },
@@ -21,6 +20,11 @@ Alpine.data('housesList', (favori=false) => ({
     },
     updateList() {
         this.fetchHouses();
+    },
+    async setFavori(house) {
+        console.log("setFavori called!");
+        await pb.collection('maison').update(house.id, {favori: !house.favori});
+        house.favori = !house.favori;
     }
 }))
 
