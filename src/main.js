@@ -21,10 +21,19 @@ Alpine.data('housesList', () => ({
     updateList() {
         this.fetchHouses();
     },
-    async setFavori(house) {
+    async setFavori(house) {
         console.log("setFavori called!");
         await pb.collection('maison').update(house.id, {favori: !house.favori});
         house.favori = !house.favori;
+    },
+    async deleteHouse(id) {
+        try {
+            await pb.collection('maison').delete(id);
+            console.log('success');
+            document.dispatchEvent(new CustomEvent('house-added'));
+        } catch (err) {
+            console.error('Error deleting record:', err);
+        }
     }
 }))
 
@@ -36,7 +45,7 @@ Alpine.data('formHandler', () => ({
             const formData = new FormData(form)
             await pb.collection('maison').create(formData)
             this.responseMessage = 'Form submitted successfully!';
-            window.dispatchEvent(new CustomEvent('house-added'));
+            document.dispatchEvent(new CustomEvent('house-added'));
         } catch (error) {
             console.log(error);
             console.error(error.message);
