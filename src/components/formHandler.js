@@ -1,3 +1,5 @@
+import pb from "../db";
+
 export default () => ({
     responseMessage: '',
     async submitForm(event) {

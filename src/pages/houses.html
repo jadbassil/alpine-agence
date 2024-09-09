@@ -43,8 +43,7 @@
                 <div class="flex flex-row justify-between">
                   <p class="text-lg font-semibold justify-start" x-text="house.nomMaison">
                   </p>
-                  <img :src="house.favori? '/star.png':'/favorite.png'" @click="setFavori(house)" alt="fav icon"
-                    class="justify-end w-6 h-6" />
+     
                 </div>
                 <p class="text-gray-600" x-text="house.adresse">
                 </p>
@@ -69,6 +68,8 @@
                 <p>Surface: <span x-text="modalHouseData.surface"></span> m2</p>
                 <p>Nombre de chambres: <span x-text="modalHouseData.nbChambres"></span></p>
                 <p>Prix: <span x-text="modalHouseData.prix"></span> €</p>
+                <img :src="modalHouseData.favori? '/star.png':'/favorite.png'" @click="setFavori(modalHouseData)" alt="fav icon"
+                class=" w-6 h-6" />
                 <img src='/delete.png'
                   @click="confirm('Vous êtes sur de supprimer cette maison de la bd.')?deleteHouse(modalHouseData.id):null; showModal=false;"
                   class=" absolute bottom-2 right-2 w-5" />
