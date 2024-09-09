@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Authentication Page</title>
+  <link href="../index.css" rel="stylesheet">
+  <script src="../main.js" type="module"></script>
+</head>
+
+<body class="bg-gray-100 h-screen flex justify-center items-center">
+  <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-4">Login</h1>
+    <div x-data="auth()">
+      <form  x-on:submit.prevent="login()" method="post">
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+          <input type="email" x-model="email" id="email" name="email"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+            >
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-bold mb-2">Password:</label>
+          <input type="password" id="password" name="password" x-model="password"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+            >
+        </div>
+        <div class="mb-4 flex items-center"></div>
+          <input type="checkbox" id="remember_me" name="remember_me" x-model="rememberMe"
+            class="mr-2 border-gray-300 rounded">
+          <label for="remember_me" class="text-gray-700">Remember Me</label>
+        </div>
+        <div class="flex justify-center">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+            Login
+          </button>
+        </div>
+       
+      </form>
+      <div class="text-center mt-4">
+        <a href="../pages/register.html" class="text-blue-500 hover:underline">Don't have an account? Register here</a>
+        <p class="text-red"><span x-text="errMsg"></span></p>
+      </div>
+    </div>  
+  </div>
+</body>
+
+</html>

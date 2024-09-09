@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Register Page</title>
+  <link href="../index.css" rel="stylesheet">
+  <script src="../main.js" type="module"></script>
+</head>
+
+<body class="bg-gray-100 h-screen flex justify-center items-center">
+  <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-4">Register</h1>
+    <div x-data="register()">
+      <form  x-on:submit.prevent="register()" method="post">
+        <div class="mb-4">
+          <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+          <input type="text" x-model="userData.name" id="name" name="name"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+            />
+        </div>
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-bold mb-2">Username:</label>
+          <input type="text" x-model="userData.username" id="username" name="username" 
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"/>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+          <input type="email" x-model="userData.email" id="email" name="email" required
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+            />
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 font-bold mb-2">Password:</label>
+          <input type="password" id="password" name="password" x-model="userData.password"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500"
+            />
+        </div>
+
+        <div class="mb-4">
+          <label for="passwordConfirm" class="block text-gray-700 font-bold mb-2">Confirm password:</label>
+          <input type="password" id="passwordConfirm" name="passwordConfirm" x-model="userData.passwordConfirm"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="flex justify-center">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+            Register
+          </button>
+        </div>
+      </form>
+      <div class="flex justify-center text-red-500">
+        <span x-text="errMsg"></span>
+      </div>
+    </div>  
+  </div>
+</body>
+
+</html>
